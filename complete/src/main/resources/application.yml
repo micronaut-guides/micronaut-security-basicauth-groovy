@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: complete
+---
 #tag::securityconfig[]
 micronaut:
   security:
