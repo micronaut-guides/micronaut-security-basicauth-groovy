@@ -1,23 +1,16 @@
 package example.micronaut
 
-import io.micronaut.context.ApplicationContext
-import io.micronaut.http.HttpHeaders
-import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
-import io.micronaut.http.MutableHttpMessage
-import io.micronaut.http.client.RxHttpClient
-import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.runtime.server.EmbeddedServer
-import spock.lang.AutoCleanup
-import spock.lang.Shared
+import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 
+import javax.inject.Inject
+
+@MicronautTest // <1>
 class BasicAuthClientSpec extends Specification {
 
-    @Shared
-    @AutoCleanup // <1>
-    EmbeddedServer embeddedServer = ApplicationContext.run(EmbeddedServer) // <2>
+    @Inject
+    EmbeddedServer embeddedServer // <2>
 
     def "Verify HTTP Basic Auth works"() {
         when:
