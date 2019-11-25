@@ -1,6 +1,5 @@
 package example.micronaut
 
-
 import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 
