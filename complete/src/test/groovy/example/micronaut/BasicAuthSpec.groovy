@@ -22,14 +22,16 @@ class BasicAuthSpec extends Specification {
     @Client("/")
     RxHttpClient client // <3>
 
-    def "Verify HTTP Basic Auth works"() {
+    def "by default every endpoint is secured"() {
         when: 'Accessing a secured URL without authenticating'
         client.toBlocking().exchange(HttpRequest.GET('/')) // <4>
 
         then: 'returns unauthorized'
-        HttpClientResponseException e = thrown(HttpClientResponseException) // <5>
+        HttpClientResponseException e = thrown() // <5>
         e.status == HttpStatus.UNAUTHORIZED
+    }
 
+    def "Verify HTTP Basic Auth works"() {
         when: 'A secured URL is accessed with Basic Auth'
         HttpRequest request = HttpRequest.GET('/')
                 .basicAuth("sherlock", "password") // <6>
