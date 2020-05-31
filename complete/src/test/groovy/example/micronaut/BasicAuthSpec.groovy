@@ -16,29 +16,26 @@ import javax.inject.Inject
 class BasicAuthSpec extends Specification {
 
     @Inject
-    EmbeddedServer embeddedServer // <2>
-
-    @Inject
     @Client("/")
-    RxHttpClient client // <3>
+    RxHttpClient client // <2>
 
     def "by default every endpoint is secured"() {
         when: 'Accessing a secured URL without authenticating'
-        client.toBlocking().exchange(HttpRequest.GET('/')) // <4>
+        client.toBlocking().exchange(HttpRequest.GET('/')) // <3>
 
         then: 'returns unauthorized'
-        HttpClientResponseException e = thrown() // <5>
+        HttpClientResponseException e = thrown() // <4>
         e.status == HttpStatus.UNAUTHORIZED
     }
 
     def "Verify HTTP Basic Auth works"() {
         when: 'A secured URL is accessed with Basic Auth'
         HttpRequest request = HttpRequest.GET('/')
-                .basicAuth("sherlock", "password") // <6>
-        HttpResponse<String> rsp = client.toBlocking().exchange(request, String) // <7>
+                .basicAuth("sherlock", "password") // <5>
+        HttpResponse<String> rsp = client.toBlocking().exchange(request, String) // <6>
 
         then: 'the endpoint can be accessed'
         rsp.status == HttpStatus.OK
-        rsp.body() == 'sherlock' // <8>
+        rsp.body() == 'sherlock' // <7>
     }
 }
