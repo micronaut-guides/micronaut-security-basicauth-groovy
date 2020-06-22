@@ -1,6 +1,6 @@
 plugins {
     id "groovy"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
     id "application"
 }
 
@@ -24,13 +24,13 @@ dependencies {
     implementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
     implementation("io.micronaut:micronaut-inject")
     implementation("io.micronaut:micronaut-validation")
-    implementation("io.micronaut:micronaut-runtime-groovy")
+    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-http-client")
 
     //tag::securitydependency[]
-    compileOnly("io.micronaut:micronaut-security-annotations")
-    implementation("io.micronaut:micronaut-security")
+    compileOnly("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security")
     //end::securitydependency[]
 
     runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
